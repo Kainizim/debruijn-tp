@@ -17,20 +17,20 @@ import argparse
 import os
 import sys
 import networkx as nx
-import matplotlib
+#import matplotlib
 from operator import itemgetter
 import random
 random.seed(9001)
 from random import randint
 import statistics
 
-__author__ = "Hippolyte MIZINIAK"
+__author__ = "Your Name"
 __copyright__ = "Universite Paris Diderot"
 __credits__ = ["Your Name"]
 __license__ = "GPL"
 __version__ = "1.0.0"  
-__maintainer__ = "Hippolyte MIZINIAK"
-__email__ = "hippolyte.miziniak@gmail.com"
+__maintainer__ = "Your Name"
+__email__ = "your@email.fr"
 __status__ = "Developpement"
 
 def isfile(path):
@@ -193,11 +193,11 @@ def fill(text, width=80):
 def draw_graph(graph, graphimg_file):
     """Draw the graph
     """                                    
-    #fig, ax = plt.subplots()
+    fig, ax = plt.subplots()
     elarge = [(u, v) for (u, v, d) in graph.edges(data=True) if d['weight'] > 3]
-    print(elarge)
+    #print(elarge)
     esmall = [(u, v) for (u, v, d) in graph.edges(data=True) if d['weight'] <= 3]
-    print(elarge)
+    #print(elarge)
     # Draw the graph with networkx
     #pos=nx.spring_layout(graph)
     pos = nx.random_layout(graph)
@@ -205,9 +205,9 @@ def draw_graph(graph, graphimg_file):
     nx.draw_networkx_edges(graph, pos, edgelist=elarge, width=6)
     nx.draw_networkx_edges(graph, pos, edgelist=esmall, width=6, alpha=0.5, 
                            edge_color='b', style='dashed')
-    nx.draw_networkx(graph, pos, node_size=10, with_labels=False)
+    #nx.draw_networkx(graph, pos, node_size=10, with_labels=False)
     # save image
-    #plt.savefig(graphimg_file)
+    plt.savefig(graphimg_file)
 
 
 def save_graph(graph, graph_file):
@@ -242,12 +242,6 @@ def main():
     path = save_contigs(list_contigs, "assemblage.txt")
 
     path_average_weight(graph, path)
-    
-    graph_1 = nx.DiGraph()
-    graph_1.add_edges_from([(1, 2), (3, 2), (2, 4), (4, 5), (5, 6), (5, 7)])
-    graph_1 = select_best_path(graph_1, [[1,2], [3,2]], [1, 1], [5, 10], delete_entry_node=True)
-    
-    remove_paths(graph, path, delete_entry_node, delete_sink_node)
 
     # Fonctions de dessin du graphe
     # A decommenter si vous souhaitez visualiser un petit 
